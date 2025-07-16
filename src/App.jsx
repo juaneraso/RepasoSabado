@@ -3,13 +3,16 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 
 import Prueba from "./components/Prueba";
-import Cards from "./components/Cards";
+
+import DonaChart from "./components/DonaChart";
+import { useState } from "react";
+import Entrada from "./components/Entrada";
 
 function App() {
   return (
     <>
       <Prueba />
-      <Cards />
+      <Entrada />
     </>
   );
 }

@@ -5,11 +5,7 @@ function Prueba() {
 
   const [numero, setNumero] = useState(0);
 
-  // let numero = 0;
-
   const aumentar = () => {
-    // numero = numero + 1;
-
     if (numero < 10) {
       setNumero(numero + 1);
     }
