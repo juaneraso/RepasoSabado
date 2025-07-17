@@ -1,17 +1,51 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Prueba() {
-  console.log("hola mundo");
-
   const [numero, setNumero] = useState(0);
+  const [datos, setDatos] = useState([]);
+  const [usuario, setUsuario] = useState("");
+
+  let nombre = "";
+  useEffect(() => {
+    const fetchDatos = async () => {
+      try {
+        const respuesta = await fetch(
+          "https://jsonplaceholder.typicode.com/users/"
+        );
+
+        const datosObtenidos = await respuesta.json();
+        setDatos(datosObtenidos);
+      } catch (err) {
+        console.log("Error al hacer fetch:", err.message);
+      }
+    };
+
+    fetchDatos();
+  }, [usuario]);
+
+  console.log("Datos:", datos);
+  // console.log("PosicionDatoCero:", datos[0].name);
+
+  console.log("UsuarioPrueba:", datos[0]?.name);
+
+  // if (datos[0] == true) {
+  //   console.log("NombreUsuario:", datos[0].name);
+  //   setUsuario(datos[0].name);
+  //   nombre = datos[0].name;
+  // }
+  // console.log(usuario);
+
+  // console.log("NombreUsuario:", datos[0].name);
 
   const aumentar = () => {
-    if (numero < 10) {
-      setNumero(numero + 1);
-    }
+    setNumero(numero + 1);
   };
 
-  console.log(numero);
+  const disminuir = () => {
+    setNumero(numero - 1);
+  };
+
+  // console.log(numero);
 
   return (
     <>
@@ -19,9 +53,12 @@ function Prueba() {
 
       <h1>Hola estudiantes</h1>
 
-      <button onClick={aumentar}>CLICK</button>
+      <button onClick={aumentar}>AUMENTAR</button>
+      <button onClick={disminuir}>DISMINUIR</button>
 
       <p>{numero}</p>
+      <h2>Datos Usuario</h2>
+      <p>{datos[0]?.name}</p>
     </>
   );
 }
