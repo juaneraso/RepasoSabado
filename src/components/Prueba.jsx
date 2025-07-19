@@ -5,7 +5,6 @@ function Prueba() {
   const [datos, setDatos] = useState([]);
   const [usuario, setUsuario] = useState("");
 
-  let nombre = "";
   useEffect(() => {
     const fetchDatos = async () => {
       try {
@@ -15,27 +14,20 @@ function Prueba() {
 
         const datosObtenidos = await respuesta.json();
         setDatos(datosObtenidos);
+        setUsuario(datosObtenidos[0]?.name);
       } catch (err) {
         console.log("Error al hacer fetch:", err.message);
       }
     };
 
     fetchDatos();
-  }, [usuario]);
+  }, []);
 
   console.log("Datos:", datos);
   // console.log("PosicionDatoCero:", datos[0].name);
 
   console.log("UsuarioPrueba:", datos[0]?.name);
-
-  // if (datos[0] == true) {
-  //   console.log("NombreUsuario:", datos[0].name);
-  //   setUsuario(datos[0].name);
-  //   nombre = datos[0].name;
-  // }
-  // console.log(usuario);
-
-  // console.log("NombreUsuario:", datos[0].name);
+  console.log("Usuario:", usuario);
 
   const aumentar = () => {
     setNumero(numero + 1);
@@ -51,14 +43,15 @@ function Prueba() {
     <>
       <h1>Componente de Prueba</h1>
 
-      <h1>Hola estudiantes</h1>
-
       <button onClick={aumentar}>AUMENTAR</button>
       <button onClick={disminuir}>DISMINUIR</button>
 
       <p>{numero}</p>
       <h2>Datos Usuario</h2>
-      <p>{datos[0]?.name}</p>
+      <label>Usuario:</label>
+      <h3>{datos[0]?.name}</h3>
+      <label>Usuario:</label>
+      <h4>{usuario}</h4>
     </>
   );
 }
